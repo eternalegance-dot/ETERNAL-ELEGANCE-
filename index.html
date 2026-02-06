@@ -279,6 +279,308 @@
             font-size: 1.2rem;
         }
 
+        /* SEARCH BUTTON IN BANNER */
+        .banner-search-btn {
+            position: absolute;
+            top: clamp(15px, 5vw, 30px);
+            right: clamp(15px, 5vw, 30px);
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--primary);
+            padding: clamp(0.6rem, 2vw, 0.8rem) clamp(1rem, 3vw, 1.5rem);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            white-space: nowrap;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .banner-search-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            color: var(--accent);
+        }
+        
+        .banner-search-btn i {
+            font-size: 1rem;
+        }
+
+        /* SEARCH MODAL */
+        .search-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: clamp(1rem, 3vw, 2rem);
+            overflow-y: auto;
+        }
+        
+        .search-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .search-modal {
+            background: white;
+            width: 100%;
+            max-width: min(800px, 95vw);
+            border-radius: 16px;
+            padding: clamp(1.5rem, 3vw, 2.5rem);
+            transform: translateY(-30px);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            margin-top: clamp(1rem, 5vw, 5rem);
+        }
+        
+        .search-modal-overlay.active .search-modal {
+            transform: translateY(0);
+        }
+        
+        .search-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .search-title {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .search-title i {
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+        
+        .close-search {
+            font-size: 1.8rem;
+            color: var(--text-light);
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+        
+        .close-search:hover {
+            background: var(--bg);
+            color: var(--primary);
+        }
+        
+        .search-form {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: clamp(1rem, 2vw, 1.2rem) clamp(1rem, 2vw, 1.5rem);
+            padding-right: 60px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1rem, 2vw, 1.1rem);
+            transition: all 0.3s;
+            background: white;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15);
+        }
+        
+        .search-submit {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--accent);
+            color: var(--primary);
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        
+        .search-submit:hover {
+            background: #e6c44d;
+            transform: translateY(-50%) scale(1.05);
+        }
+        
+        .search-filters {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .search-filter {
+            padding: 0.5rem 1rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-light);
+            transition: all 0.2s;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .search-filter:hover {
+            border-color: var(--accent);
+            color: var(--primary);
+        }
+        
+        .search-filter.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .search-results {
+            max-height: 400px;
+            overflow-y: auto;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .search-result-item:hover {
+            background: var(--bg);
+        }
+        
+        .search-result-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        .search-result-info {
+            flex: 1;
+        }
+        
+        .search-result-name {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+            font-size: 0.95rem;
+        }
+        
+        .search-result-category {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .search-result-category i {
+            font-size: 0.7rem;
+            color: var(--accent);
+        }
+        
+        .search-result-price {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 1rem;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-light);
+        }
+        
+        .no-results i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--border);
+            display: block;
+        }
+        
+        .recent-searches {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .recent-searches-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .recent-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .recent-tag {
+            padding: 0.4rem 0.8rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .recent-tag:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
         /* --- CONTAINER & LAYOUT --- */
         .container { 
             max-width: 1400px; 
@@ -836,7 +1138,7 @@
         }
 
         .option-group { 
-            margin-bottom: clamp(1.5rem, 3vw, 2rem); 
+            margin-bottom: clamp(1rem, 2.5vw, 1.5rem); 
         }
         .option-label { 
             display: block; 
@@ -851,6 +1153,52 @@
         .option-label i {
             color: var(--accent);
             font-size: 0.8rem;
+        }
+
+        /* Quantity Selector */
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: clamp(1.5rem, 3vw, 2rem);
+        }
+        
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 2px solid var(--border);
+            background: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .quantity-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        .quantity-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .quantity-display {
+            width: 60px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary);
+            background: var(--bg);
+            border-radius: 8px;
         }
 
         .swatches { 
@@ -1047,6 +1395,7 @@
             margin-bottom: 1.5rem; 
             padding-bottom: 1.5rem;
             border-bottom: 1px solid var(--border);
+            position: relative;
         }
         .cart-item:last-child {
             border-bottom: none;
@@ -1084,23 +1433,75 @@
             font-weight: 700; 
             color: var(--accent); 
             font-size: 1rem;
+            margin-bottom: 0.5rem;
         }
-        .cart-remove { 
-            color: #ef4444; 
-            font-size: 0.8rem; 
-            font-weight: 600; 
-            cursor: pointer; 
-            margin-top: 0.5rem; 
-            display: inline-flex;
+        
+        /* Cart Quantity Controls */
+        .cart-quantity {
+            display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .cart-quantity-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: white;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .cart-quantity-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        .cart-quantity-display {
+            width: 40px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary);
+            background: var(--bg);
+            border-radius: 6px;
+        }
+        
+        .cart-item-subtotal {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        .cart-remove { 
+            position: absolute;
+            top: 0;
+            right: 0;
+            color: #ef4444; 
+            font-size: 1rem; 
+            cursor: pointer; 
             transition: color 0.2s;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
         }
         .cart-remove:hover {
+            background: #fee2e2;
             color: #dc2626;
-        }
-        .cart-remove i {
-            font-size: 0.7rem;
         }
 
         .cart-footer { 
@@ -1282,6 +1683,10 @@
             .modal {
                 max-height: 95vh;
             }
+            
+            .search-modal {
+                margin-top: clamp(0.5rem, 3vw, 2rem);
+            }
         }
 
         /* Tablets */
@@ -1317,6 +1722,24 @@
             }
             .nav-link::after {
                 display: none;
+            }
+            
+            /* Banner Search Button */
+            .banner-search-btn {
+                top: 15px;
+                right: 15px;
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+            
+            /* Search Modal */
+            .search-modal {
+                padding: 1.5rem;
+                margin-top: 1rem;
+            }
+            
+            .search-title {
+                font-size: 1.3rem;
             }
             
             /* Modal - Stack Vertically */
@@ -1363,6 +1786,15 @@
                 font-size: 0.9rem;
                 padding: 0.8rem 1.5rem;
             }
+            
+            /* Cart Quantity */
+            .cart-quantity {
+                margin-top: 0.75rem;
+            }
+            
+            .cart-item-info {
+                padding-right: 25px;
+            }
         }
 
         /* Large phones */
@@ -1399,12 +1831,57 @@
                 flex-shrink: 0;
             }
             
+            /* Search Modal */
+            .search-filters {
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .search-filter {
+                flex-shrink: 0;
+            }
+            
             .modal-title {
                 font-size: 1.3rem;
             }
             
             .modal-price {
                 font-size: 1.3rem;
+            }
+            
+            /* Quantity Selector */
+            .quantity-selector {
+                margin-bottom: 1.5rem;
+            }
+            
+            .quantity-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 1.1rem;
+            }
+            
+            .quantity-display {
+                width: 50px;
+                height: 36px;
+            }
+            
+            /* Cart Item */
+            .cart-item-img {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .cart-quantity-btn {
+                width: 26px;
+                height: 26px;
+                font-size: 0.9rem;
+            }
+            
+            .cart-quantity-display {
+                width: 36px;
+                height: 26px;
+                font-size: 0.85rem;
             }
         }
 
@@ -1419,10 +1896,50 @@
                 height: 220px;
             }
             
+            /* Banner Buttons */
             .banner-button {
                 bottom: 15px;
                 padding: 0.7rem 1.2rem;
                 font-size: 0.85rem;
+            }
+            
+            .banner-search-btn {
+                top: 10px;
+                right: 10px;
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .banner-search-btn span {
+                display: none;
+            }
+            
+            .banner-search-btn i {
+                margin-right: 0;
+            }
+            
+            /* Search Modal */
+            .search-modal {
+                padding: 1rem;
+                border-radius: 12px;
+            }
+            
+            .search-header {
+                margin-bottom: 1rem;
+            }
+            
+            .search-title {
+                font-size: 1.2rem;
+            }
+            
+            .search-input {
+                padding: 0.8rem 1rem;
+                padding-right: 50px;
+            }
+            
+            .search-submit {
+                width: 40px;
+                height: 40px;
             }
             
             .success-content {
@@ -1461,8 +1978,21 @@
             }
             
             .cart-item-img {
-                width: 70px;
-                height: 70px;
+                width: 60px;
+                height: 60px;
+            }
+            
+            /* Modal Quantity */
+            .quantity-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 1rem;
+            }
+            
+            .quantity-display {
+                width: 45px;
+                height: 32px;
+                font-size: 1rem;
             }
         }
 
@@ -1485,6 +2015,16 @@
                 font-size: 0.8rem;
             }
             
+            /* Search Modal */
+            .search-modal-overlay {
+                padding: 0.5rem;
+            }
+            
+            .search-modal {
+                padding: 0.8rem;
+                border-radius: 10px;
+            }
+            
             .modal {
                 border-radius: 12px;
             }
@@ -1501,6 +2041,20 @@
                 top: 1rem;
                 right: 1rem;
             }
+            
+            /* Quantity */
+            .quantity-selector {
+                gap: 0.5rem;
+            }
+            
+            .quantity-btn {
+                width: 30px;
+                height: 30px;
+            }
+            
+            .quantity-display {
+                width: 40px;
+            }
         }
 
         /* Landscape phones */
@@ -1515,6 +2069,17 @@
             
             .cart-drawer {
                 max-height: 100vh;
+            }
+            
+            /* Search Modal */
+            .search-modal {
+                margin-top: 0.5rem;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+            
+            .search-results {
+                max-height: 200px;
             }
         }
 
@@ -1557,8 +2122,17 @@
             
             .add-btn:not(:disabled):hover,
             .checkout-btn:hover,
-            .banner-button:hover {
+            .banner-button:hover,
+            .banner-search-btn:hover,
+            .search-submit:hover {
                 transform: none;
+            }
+            
+            .quantity-btn:hover,
+            .cart-quantity-btn:hover {
+                transform: none;
+                border-color: var(--border);
+                color: var(--primary);
             }
         }
 
@@ -1624,10 +2198,58 @@
     <!-- BANNER WITH BUTTON -->
     <div class="banner-container">
         <img src="banner.png" alt="Eternal Elegance - Watches, Perfumes and Clothes" class="banner-img" loading="lazy">
+        <!-- Search Button in Banner -->
+        <button class="banner-search-btn" onclick="openSearchModal()">
+            <i class="fas fa-search"></i>
+            <span>Search Products</span>
+        </button>
         <a href="#shop" class="banner-button">
             <i class="fas fa-shopping-bag"></i>
             Shop Now
         </a>
+    </div>
+
+    <!-- SEARCH MODAL -->
+    <div class="search-modal-overlay" id="searchModalOverlay">
+        <div class="search-modal">
+            <div class="search-header">
+                <div class="search-title">
+                    <i class="fas fa-search"></i>
+                    Search Products
+                </div>
+                <button class="close-search" onclick="closeSearchModal()" aria-label="Close search">&times;</button>
+            </div>
+            
+            <div class="search-form">
+                <input type="text" class="search-input" id="searchInput" placeholder="What are you looking for? Try 'watch', 'shirt', 'perfume'..." autocomplete="off">
+                <button class="search-submit" onclick="performSearch()" aria-label="Search">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            
+            <div class="search-filters">
+                <div class="search-filter active" onclick="setSearchFilter('all')">All</div>
+                <div class="search-filter" onclick="setSearchFilter('watches')">Watches</div>
+                <div class="search-filter" onclick="setSearchFilter('shoes')">Shoes</div>
+                <div class="search-filter" onclick="setSearchFilter('clothes')">Clothing</div>
+                <div class="search-filter" onclick="setSearchFilter('perfumes')">Perfumes</div>
+            </div>
+            
+            <div class="search-results" id="searchResults">
+                <div class="no-results">
+                    <i class="fas fa-search"></i>
+                    <p>Start typing to search for products</p>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-light);">Try searching for watches, shoes, shirts, or perfumes</p>
+                </div>
+            </div>
+            
+            <div class="recent-searches" id="recentSearches" style="display: none;">
+                <div class="recent-searches-title">Recent Searches</div>
+                <div class="recent-tags" id="recentTags">
+                    <!-- Recent search tags will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- MAIN CONTENT -->
@@ -1910,6 +2532,16 @@
                 <div class="modal-price" id="mPrice">$0.00</div>
                 <p class="modal-desc" id="mDesc">Full product description goes here.</p>
 
+                <!-- Quantity Selector -->
+                <div class="option-group">
+                    <label class="option-label"><i class="fas fa-layer-group"></i> Quantity</label>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn" id="decreaseQty" onclick="changeQuantity(-1)">-</button>
+                        <div class="quantity-display" id="quantityDisplay">1</div>
+                        <button class="quantity-btn" id="increaseQty" onclick="changeQuantity(1)">+</button>
+                    </div>
+                </div>
+
                 <div class="option-group">
                     <label class="option-label" id="optionLabel"><i class="fas fa-palette"></i> Select Color</label>
                     <div class="swatches" id="mSwatches"></div>
@@ -2137,12 +2769,15 @@
         let selectedColor = null;
         let selectedFlavor = null;
         let selectedSize = null;
+        let selectedQuantity = 1;
         let cart = JSON.parse(localStorage.getItem('eternalCart')) || [];
         let stripe = null;
         let cardElement = null;
         let expiryElement = null;
         let cvcElement = null;
         let selectedPaymentMethod = 'card';
+        let searchFilter = 'all';
+        let recentSearches = JSON.parse(localStorage.getItem('eternalRecentSearches')) || [];
         
         // --- DOM ELEMENTS ---
         const grid = document.getElementById('productGrid');
@@ -2154,6 +2789,14 @@
         const navLinks = document.getElementById('navLinks');
         const checkoutPage = document.getElementById('checkoutPage');
         const successModal = document.getElementById('successModal');
+        const searchModalOverlay = document.getElementById('searchModalOverlay');
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+        const recentSearchesContainer = document.getElementById('recentSearches');
+        const recentTags = document.getElementById('recentTags');
+        const quantityDisplay = document.getElementById('quantityDisplay');
+        const decreaseQtyBtn = document.getElementById('decreaseQty');
+        const increaseQtyBtn = document.getElementById('increaseQty');
 
         // --- INIT ---
         function init() {
@@ -2161,6 +2804,7 @@
             updateCartUI();
             setupStripe();
             setupEventListeners();
+            updateRecentSearchesUI();
         }
 
         // --- EVENT LISTENERS ---
@@ -2173,6 +2817,11 @@
             // Close success modal when clicking outside
             successModal.addEventListener('click', (e) => {
                 if (e.target === successModal) successModal.classList.remove('active');
+            });
+
+            // Close search modal when clicking outside
+            searchModalOverlay.addEventListener('click', (e) => {
+                if (e.target === searchModalOverlay) closeSearchModal();
             });
 
             // Close cart when clicking outside on mobile
@@ -2198,10 +2847,173 @@
                 if (e.key === 'Escape') {
                     closeModal();
                     successModal.classList.remove('active');
+                    closeSearchModal();
                     if (cartDrawer.classList.contains('open')) {
                         toggleCart();
                     }
                 }
+            });
+
+            // Handle search input
+            searchInput.addEventListener('input', (e) => {
+                performSearch();
+            });
+
+            // Handle Enter key in search input
+            searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    performSearch();
+                }
+            });
+
+            // Focus search input when modal opens
+            searchModalOverlay.addEventListener('transitionend', () => {
+                if (searchModalOverlay.classList.contains('active')) {
+                    searchInput.focus();
+                }
+            });
+        }
+
+        // --- SEARCH FUNCTIONALITY ---
+        function openSearchModal() {
+            searchModalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            // Focus input after transition
+            setTimeout(() => searchInput.focus(), 300);
+        }
+
+        function closeSearchModal() {
+            searchModalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+            searchInput.value = '';
+            clearSearchResults();
+        }
+
+        function setSearchFilter(filter) {
+            searchFilter = filter;
+            
+            // Update active filter button
+            document.querySelectorAll('.search-filter').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Perform search with current query
+            performSearch();
+        }
+
+        function performSearch() {
+            const query = searchInput.value.trim().toLowerCase();
+            
+            if (!query) {
+                clearSearchResults();
+                updateRecentSearchesUI();
+                return;
+            }
+            
+            // Filter products based on search query and filter
+            const filteredProducts = products.filter(product => {
+                // Check if product matches search filter
+                if (searchFilter !== 'all' && product.category !== searchFilter) {
+                    return false;
+                }
+                
+                // Check if product matches search query
+                const matchesName = product.name.toLowerCase().includes(query);
+                const matchesCategory = product.category.toLowerCase().includes(query);
+                const matchesDesc = product.desc.toLowerCase().includes(query);
+                
+                return matchesName || matchesCategory || matchesDesc;
+            });
+            
+            displaySearchResults(filteredProducts, query);
+            
+            // Save to recent searches if not empty
+            if (filteredProducts.length > 0 && !recentSearches.includes(query)) {
+                recentSearches.unshift(query);
+                // Keep only last 5 searches
+                if (recentSearches.length > 5) {
+                    recentSearches.pop();
+                }
+                localStorage.setItem('eternalRecentSearches', JSON.stringify(recentSearches));
+                updateRecentSearchesUI();
+            }
+        }
+
+        function displaySearchResults(results, query) {
+            searchResults.innerHTML = '';
+            
+            if (results.length === 0) {
+                searchResults.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <p>No products found for "${query}"</p>
+                        <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-light);">Try a different search term</p>
+                    </div>
+                `;
+                recentSearchesContainer.style.display = 'none';
+                return;
+            }
+            
+            recentSearchesContainer.style.display = 'block';
+            
+            results.forEach(product => {
+                // Get category icon
+                let categoryIcon = 'fas fa-tag';
+                if (product.category === 'watches') categoryIcon = 'fas fa-clock';
+                else if (product.category === 'shoes') categoryIcon = 'fas fa-shoe-prints';
+                else if (product.category === 'clothes') categoryIcon = 'fas fa-tshirt';
+                else if (product.category === 'perfumes') categoryIcon = 'fas fa-wine-bottle';
+                
+                const resultItem = document.createElement('div');
+                resultItem.className = 'search-result-item';
+                resultItem.onclick = () => {
+                    openModal(product.id);
+                    closeSearchModal();
+                };
+                
+                resultItem.innerHTML = `
+                    <img src="${product.image}" class="search-result-img" alt="${product.name}" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=600&q=80'">
+                    <div class="search-result-info">
+                        <div class="search-result-name">${product.name}</div>
+                        <div class="search-result-category"><i class="${categoryIcon}"></i> ${product.category}</div>
+                    </div>
+                    <div class="search-result-price">$${product.price.toFixed(2)}</div>
+                `;
+                
+                searchResults.appendChild(resultItem);
+            });
+        }
+
+        function clearSearchResults() {
+            searchResults.innerHTML = `
+                <div class="no-results">
+                    <i class="fas fa-search"></i>
+                    <p>Start typing to search for products</p>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-light);">Try searching for watches, shoes, shirts, or perfumes</p>
+                </div>
+            `;
+            recentSearchesContainer.style.display = recentSearches.length > 0 ? 'block' : 'none';
+        }
+
+        function updateRecentSearchesUI() {
+            recentTags.innerHTML = '';
+            
+            if (recentSearches.length === 0) {
+                recentSearchesContainer.style.display = 'none';
+                return;
+            }
+            
+            recentSearchesContainer.style.display = 'block';
+            
+            recentSearches.forEach(searchTerm => {
+                const tag = document.createElement('div');
+                tag.className = 'recent-tag';
+                tag.textContent = searchTerm;
+                tag.onclick = () => {
+                    searchInput.value = searchTerm;
+                    performSearch();
+                };
+                recentTags.appendChild(tag);
             });
         }
 
@@ -2266,6 +3078,11 @@
             selectedColor = null;
             selectedFlavor = null;
             selectedSize = null;
+            selectedQuantity = 1; // Reset quantity to 1
+            
+            // Update quantity display
+            quantityDisplay.textContent = selectedQuantity;
+            updateQuantityButtons();
 
             // Get category icon
             let categoryIcon = 'fas fa-tag';
@@ -2344,6 +3161,48 @@
             document.body.style.overflow = '';
         }
 
+        function changeQuantity(change) {
+            selectedQuantity += change;
+            
+            // Ensure quantity is between 1 and 99
+            if (selectedQuantity < 1) selectedQuantity = 1;
+            if (selectedQuantity > 99) selectedQuantity = 99;
+            
+            quantityDisplay.textContent = selectedQuantity;
+            updateQuantityButtons();
+            updateAddButtonText();
+        }
+
+        function updateQuantityButtons() {
+            decreaseQtyBtn.disabled = selectedQuantity <= 1;
+            increaseQtyBtn.disabled = selectedQuantity >= 99;
+        }
+
+        function updateAddButtonText() {
+            const addBtn = document.getElementById('mAddBtn');
+            let selectionText = '';
+            
+            if (currentProduct.category === 'perfumes') {
+                if (selectedFlavor && selectedSize) {
+                    selectionText = `Add ${selectedQuantity} × ${selectedSize} (${selectedFlavor.name}) - $${(currentProduct.price * selectedQuantity).toFixed(2)}`;
+                }
+            } else {
+                if (selectedColor && selectedSize) {
+                    selectionText = `Add ${selectedQuantity} × ${selectedSize} (${selectedColor.name}) - $${(currentProduct.price * selectedQuantity).toFixed(2)}`;
+                }
+            }
+            
+            if (selectionText) {
+                addBtn.innerHTML = `<i class="fas fa-shopping-cart"></i> ${selectionText}`;
+            } else {
+                if (currentProduct.category === 'perfumes') {
+                    addBtn.innerHTML = `<i class="fas fa-shopping-cart"></i> Select Flavor & Size`;
+                } else {
+                    addBtn.innerHTML = `<i class="fas fa-shopping-cart"></i> Select Options`;
+                }
+            }
+        }
+
         function setColor(index, colorObj) {
             selectedColor = colorObj;
             selectedFlavor = null;
@@ -2380,38 +3239,27 @@
         }
 
         function checkBtn() {
-            let selectionText = '';
             let isValid = false;
             
             if (currentProduct.category === 'perfumes') {
                 if (selectedFlavor && selectedSize) {
                     isValid = true;
-                    selectionText = `Add ${selectedSize} (${selectedFlavor.name}) - $${currentProduct.price.toFixed(2)}`;
                 }
             } else {
                 if (selectedColor && selectedSize) {
                     isValid = true;
-                    selectionText = `Add ${selectedSize} (${selectedColor.name}) - $${currentProduct.price.toFixed(2)}`;
                 }
             }
             
             const addBtn = document.getElementById('mAddBtn');
             addBtn.disabled = !isValid;
             
-            if (isValid) {
-                addBtn.innerHTML = `<i class="fas fa-shopping-cart"></i> ${selectionText}`;
-            } else {
-                if (currentProduct.category === 'perfumes') {
-                    addBtn.innerHTML = `<i class="fas fa-shopping-cart"></i> Select Flavor & Size`;
-                } else {
-                    addBtn.innerHTML = `<i class="fas fa-shopping-cart"></i> Select Options`;
-                }
-            }
+            updateAddButtonText();
         }
 
         // --- CART LOGIC ---
         function addToCart() {
-            if (!selectedSize || (!selectedColor && !selectedFlavor)) return;
+            if (!selectedSize || (!selectedColor && !selectedFlavor) || selectedQuantity < 1) return;
             
             const item = {
                 uid: Date.now() + Math.random(),
@@ -2421,14 +3269,29 @@
                 image: currentProduct.image,
                 color: currentProduct.category === 'perfumes' ? selectedFlavor.name : selectedColor.name,
                 size: selectedSize,
-                category: currentProduct.category
+                category: currentProduct.category,
+                quantity: selectedQuantity
             };
             
-            cart.push(item);
+            // Check if item already exists in cart with same options
+            const existingItemIndex = cart.findIndex(i => 
+                i.productId === item.productId && 
+                i.color === item.color && 
+                i.size === item.size
+            );
+            
+            if (existingItemIndex > -1) {
+                // Update quantity if item already exists
+                cart[existingItemIndex].quantity += item.quantity;
+            } else {
+                // Add new item
+                cart.push(item);
+            }
+            
             saveCart();
             updateCartUI();
             closeModal();
-            showToast('Item added to your bag');
+            showToast(`${selectedQuantity} item${selectedQuantity > 1 ? 's' : ''} added to your bag`);
         }
 
         function removeFromCart(uid) {
@@ -2438,14 +3301,30 @@
             showToast('Item removed from cart');
         }
 
+        function updateCartItemQuantity(uid, change) {
+            const itemIndex = cart.findIndex(i => i.uid === uid);
+            if (itemIndex === -1) return;
+            
+            cart[itemIndex].quantity += change;
+            
+            // Remove item if quantity reaches 0
+            if (cart[itemIndex].quantity <= 0) {
+                cart.splice(itemIndex, 1);
+            }
+            
+            saveCart();
+            updateCartUI();
+        }
+
         function saveCart() {
             localStorage.setItem('eternalCart', JSON.stringify(cart));
         }
 
         function updateCartUI() {
-            // Update cart badge
-            cartBadge.innerText = cart.length;
-            cart.length > 0 ? cartBadge.classList.add('visible') : cartBadge.classList.remove('visible');
+            // Update cart badge (show total items, not unique items)
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartBadge.innerText = totalItems;
+            totalItems > 0 ? cartBadge.classList.add('visible') : cartBadge.classList.remove('visible');
 
             // Update cart items
             cartItemsEl.innerHTML = '';
@@ -2455,7 +3334,9 @@
                 cartItemsEl.innerHTML = '<div style="text-align:center; color:var(--text-light); margin-top:3rem; font-size:0.9rem;">Your bag is currently empty.</div>';
             } else {
                 cart.forEach(item => {
-                    total += item.price;
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    
                     const div = document.createElement('div');
                     div.className = 'cart-item';
                     
@@ -2471,9 +3352,17 @@
                         <div class="cart-item-info">
                             <div class="cart-item-name">${item.name}</div>
                             <div class="cart-item-meta">${metaText}</div>
-                            <div class="cart-item-price">$${item.price.toFixed(2)}</div>
-                            <div class="cart-remove" onclick="removeFromCart(${item.uid})"><i class="fas fa-trash-alt"></i> Remove</div>
+                            <div class="cart-item-price">$${item.price.toFixed(2)} each</div>
+                            
+                            <div class="cart-quantity">
+                                <button class="cart-quantity-btn" onclick="updateCartItemQuantity(${item.uid}, -1)">-</button>
+                                <div class="cart-quantity-display">${item.quantity}</div>
+                                <button class="cart-quantity-btn" onclick="updateCartItemQuantity(${item.uid}, 1)">+</button>
+                            </div>
+                            
+                            <div class="cart-item-subtotal">Subtotal: $${itemTotal.toFixed(2)}</div>
                         </div>
+                        <div class="cart-remove" onclick="removeFromCart(${item.uid})">&times;</div>
                     `;
                     cartItemsEl.appendChild(div);
                 });
@@ -2523,7 +3412,9 @@
             orderItemsContainer.innerHTML = '';
             
             cart.forEach(item => {
-                subtotal += item.price;
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                
                 const div = document.createElement('div');
                 div.className = 'order-summary-item';
                 
@@ -2536,10 +3427,10 @@
                 
                 div.innerHTML = `
                     <div>
-                        <div style="font-weight: 600;">${item.name}</div>
+                        <div style="font-weight: 600;">${item.name} × ${item.quantity}</div>
                         ${metaText}
                     </div>
-                    <div>$${item.price.toFixed(2)}</div>
+                    <div>$${itemTotal.toFixed(2)}</div>
                 `;
                 orderItemsContainer.appendChild(div);
             });
