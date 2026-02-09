@@ -234,19 +234,67 @@
             transform: rotate(-45deg) translate(5px, -5px); 
         }
 
-        /* --- PRODUCTS BANNER SECTION --- */
+        /* --- SCROLLABLE BANNERS SECTION --- */
         .banners-section {
             margin-top: clamp(2rem, 5vw, 4rem);
             margin-bottom: clamp(3rem, 6vw, 5rem);
+            position: relative;
         }
         
-        .banners-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: clamp(1rem, 2vw, 1.5rem);
+        .banners-container {
+            position: relative;
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 clamp(1rem, 3vw, 1.5rem);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .scroll-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 2px solid var(--border);
+            color: var(--primary);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .scroll-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(15, 23, 42, 0.2);
+        }
+        
+        .scroll-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .banners-scroll-container {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .banners-scroll {
+            display: flex;
+            gap: clamp(1rem, 2vw, 1.5rem);
+            padding: 0.5rem;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            -webkit-overflow-scrolling: touch;
         }
         
         .banner-item {
@@ -254,19 +302,21 @@
             border-radius: var(--radius);
             overflow: hidden;
             aspect-ratio: 16/9;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
+            min-width: 100%;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
         .banner-item:hover {
             transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
         
         .banner-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.8s ease;
         }
         
         .banner-item:hover .banner-img {
@@ -278,20 +328,56 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent);
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent);
             color: white;
-            padding: clamp(1rem, 3vw, 1.5rem);
+            padding: clamp(1.5rem, 4vw, 2.5rem);
         }
         
         .banner-title {
-            font-size: clamp(1.1rem, 2vw, 1.3rem);
-            font-weight: 700;
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            font-weight: 800;
             margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
         
         .banner-subtitle {
-            font-size: clamp(0.85rem, 1.5vw, 0.95rem);
-            opacity: 0.9;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            opacity: 0.95;
+            font-weight: 400;
+        }
+        
+        /* Banner Dots Indicator */
+        .banner-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+            position: absolute;
+            bottom: 1rem;
+            left: 0;
+            right: 0;
+            z-index: 5;
+        }
+        
+        .banner-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+        
+        .banner-dot.active {
+            background: var(--accent);
+            transform: scale(1.2);
+        }
+        
+        .banner-dot:hover {
+            background: var(--white);
+            transform: scale(1.3);
         }
 
         /* --- CONTAINER & LAYOUT --- */
@@ -1523,8 +1609,10 @@
         
         /* Tablets and small laptops */
         @media (max-width: 1024px) {
-            .banners-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .scroll-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
             }
             
             .checkout-grid {
@@ -1572,12 +1660,32 @@
             }
             
             /* Banners */
-            .banners-grid {
-                grid-template-columns: 1fr;
+            .banners-container {
+                padding: 0 0.5rem;
+            }
+            
+            .scroll-btn {
+                display: none;
+            }
+            
+            .banners-scroll-container {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+            
+            .banners-scroll-container::-webkit-scrollbar {
+                display: none;
+            }
+            
+            .banners-scroll {
+                gap: 1rem;
+                padding: 0.25rem;
             }
             
             .banner-item {
-                aspect-ratio: 21/9;
+                min-width: calc(100% - 2rem);
             }
             
             /* Modal - Stack Vertically */
@@ -1850,10 +1958,6 @@
             .footer-content {
                 max-width: 1400px;
             }
-            
-            .banners-grid {
-                max-width: 1400px;
-            }
         }
 
         /* Touch device optimizations */
@@ -1955,33 +2059,48 @@
 
     <!-- BANNERS SECTION -->
     <section class="banners-section">
-        <div class="banners-grid">
-            <!-- Banner 1 -->
-            <div class="banner-item">
-                <img src="banner1.png" alt="New Collection" class="banner-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80'">
-                <div class="banner-overlay">
-                    <div class="banner-title">New Collection 2024</div>
-                    <div class="banner-subtitle">Discover our latest arrivals</div>
+        <div class="banners-container">
+            <!-- Left Scroll Button -->
+            <button class="scroll-btn left" onclick="scrollBanners(-1)" aria-label="Scroll left">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            
+            <!-- Scrollable Banners Container -->
+            <div class="banners-scroll-container">
+                <div class="banners-scroll" id="bannersScroll">
+                    <!-- Banner 1 -->
+                    <div class="banner-item">
+                        <img src="banner1.png" alt="New Collection" class="banner-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80'">
+                        <div class="banner-overlay">
+                            <div class="banner-title">New Collection 2024</div>
+                            <div class="banner-subtitle">Discover our latest arrivals</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Banner 2 -->
+                    <div class="banner-item">
+                        <img src="banner2.png" alt="Summer Sale" class="banner-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=800&q=80'">
+                        <div class="banner-overlay">
+                            <div class="banner-title">Summer Sale</div>
+                            <div class="banner-subtitle">Up to 50% off selected items</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Banner 3 -->
+                    <div class="banner-item">
+                        <img src="banner3.png" alt="Premium Quality" class="banner-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=800&q=80'">
+                        <div class="banner-overlay">
+                            <div class="banner-title">Premium Quality</div>
+                            <div class="banner-subtitle">Crafted with excellence</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <!-- Banner 2 -->
-            <div class="banner-item">
-                <img src="banner2.png" alt="Summer Sale" class="banner-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=800&q=80'">
-                <div class="banner-overlay">
-                    <div class="banner-title">Summer Sale</div>
-                    <div class="banner-subtitle">Up to 50% off selected items</div>
-                </div>
-            </div>
-            
-            <!-- Banner 3 -->
-            <div class="banner-item">
-                <img src="banner3.png" alt="Premium Quality" class="banner-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=800&q=80'">
-                <div class="banner-overlay">
-                    <div class="banner-title">Premium Quality</div>
-                    <div class="banner-subtitle">Crafted with excellence</div>
-                </div>
-            </div>
+            <!-- Right Scroll Button -->
+            <button class="scroll-btn right" onclick="scrollBanners(1)" aria-label="Scroll right">
+                <i class="fas fa-chevron-right"></i>
+            </button>
         </div>
     </section>
 
@@ -2537,6 +2656,7 @@
         let cvcElement = null;
         let selectedPaymentMethod = 'card';
         let currentCategory = 'all';
+        let autoScrollInterval = null;
         
         // --- DOM ELEMENTS ---
         const newArrivalsGrid = document.getElementById('newArrivalsGrid');
@@ -2553,6 +2673,7 @@
         const quantityDisplay = document.getElementById('quantityDisplay');
         const decreaseQtyBtn = document.getElementById('decreaseQty');
         const increaseQtyBtn = document.getElementById('increaseQty');
+        const bannersScroll = document.getElementById('bannersScroll');
 
         // --- INIT ---
         function init() {
@@ -2560,6 +2681,7 @@
             updateCartUI();
             setupStripe();
             setupEventListeners();
+            initBanners();
         }
 
         // --- EVENT LISTENERS ---
@@ -2713,6 +2835,145 @@
                     sections['best'].scrollIntoView({ behavior: 'smooth' });
                 }
             }
+        }
+
+        // --- BANNERS SCROLLING ---
+        function scrollBanners(direction) {
+            const bannerItems = document.querySelectorAll('.banner-item');
+            const containerWidth = bannersScroll.parentElement.offsetWidth;
+            const scrollAmount = containerWidth + parseFloat(getComputedStyle(bannersScroll).gap);
+            
+            let currentScroll = bannersScroll.scrollLeft || 0;
+            let targetScroll;
+            
+            if (direction > 0) {
+                // Scroll right
+                targetScroll = currentScroll + scrollAmount;
+                // If at the end, loop to start
+                if (targetScroll >= bannersScroll.scrollWidth - containerWidth) {
+                    targetScroll = 0;
+                }
+            } else {
+                // Scroll left
+                targetScroll = currentScroll - scrollAmount;
+                // If at the start, loop to end
+                if (targetScroll < 0) {
+                    targetScroll = bannersScroll.scrollWidth - containerWidth;
+                }
+            }
+            
+            bannersScroll.scrollTo({
+                left: targetScroll,
+                behavior: 'smooth'
+            });
+            
+            updateBannerDots();
+        }
+        
+        function updateBannerDots() {
+            const bannerItems = document.querySelectorAll('.banner-item');
+            const containerWidth = bannersScroll.parentElement.offsetWidth;
+            const currentIndex = Math.round(bannersScroll.scrollLeft / containerWidth);
+            
+            // Update dots if they exist
+            const dots = document.querySelectorAll('.banner-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+        
+        // Add banner dots to the HTML dynamically
+        function addBannerDots() {
+            const bannersSection = document.querySelector('.banners-section');
+            const dotsContainer = document.createElement('div');
+            dotsContainer.className = 'banner-dots';
+            
+            // Create 3 dots for 3 banners
+            for (let i = 0; i < 3; i++) {
+                const dot = document.createElement('button');
+                dot.className = `banner-dot ${i === 0 ? 'active' : ''}`;
+                dot.setAttribute('aria-label', `Go to banner ${i + 1}`);
+                dot.onclick = () => scrollToBanner(i);
+                dotsContainer.appendChild(dot);
+            }
+            
+            bannersSection.appendChild(dotsContainer);
+        }
+        
+        function scrollToBanner(index) {
+            const containerWidth = bannersScroll.parentElement.offsetWidth;
+            const scrollAmount = containerWidth * index;
+            
+            bannersScroll.scrollTo({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+            
+            updateBannerDots();
+        }
+        
+        // Initialize banner scrolling on page load
+        function initBanners() {
+            // Make banners scrollable on touch devices
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+            
+            bannersScroll.addEventListener('mousedown', (e) => {
+                isDown = true;
+                startX = e.pageX - bannersScroll.offsetLeft;
+                scrollLeft = bannersScroll.scrollLeft;
+                bannersScroll.style.cursor = 'grabbing';
+            });
+            
+            bannersScroll.addEventListener('mouseleave', () => {
+                isDown = false;
+                bannersScroll.style.cursor = 'grab';
+            });
+            
+            bannersScroll.addEventListener('mouseup', () => {
+                isDown = false;
+                bannersScroll.style.cursor = 'grab';
+            });
+            
+            bannersScroll.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - bannersScroll.offsetLeft;
+                const walk = (x - startX) * 2;
+                bannersScroll.scrollLeft = scrollLeft - walk;
+            });
+            
+            // Add scroll event to update dots
+            bannersScroll.addEventListener('scroll', updateBannerDots);
+            
+            // Add dots indicator
+            addBannerDots();
+            
+            // Auto-rotate banners every 5 seconds (optional)
+            function startAutoScroll() {
+                autoScrollInterval = setInterval(() => {
+                    scrollBanners(1);
+                }, 5000);
+            }
+            
+            function stopAutoScroll() {
+                clearInterval(autoScrollInterval);
+            }
+            
+            // Start auto-scroll
+            startAutoScroll();
+            
+            // Pause auto-scroll on hover
+            bannersScroll.addEventListener('mouseenter', stopAutoScroll);
+            bannersScroll.addEventListener('mouseleave', startAutoScroll);
+            
+            // Pause auto-scroll when modal or cart is open
+            modalOverlay.addEventListener('mouseenter', stopAutoScroll);
+            modalOverlay.addEventListener('mouseleave', startAutoScroll);
+            
+            cartDrawer.addEventListener('mouseenter', stopAutoScroll);
+            cartDrawer.addEventListener('mouseleave', startAutoScroll);
         }
 
         // --- MOBILE MENU ---
