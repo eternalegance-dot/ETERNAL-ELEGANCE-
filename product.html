@@ -234,152 +234,47 @@
             transform: rotate(-45deg) translate(5px, -5px); 
         }
 
-        /* --- SCROLLABLE BANNERS SECTION --- */
-        .banners-section {
-            margin-top: clamp(2rem, 5vw, 4rem);
-            margin-bottom: clamp(3rem, 6vw, 5rem);
-            position: relative;
-        }
-        
-        .banners-container {
-            position: relative;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 clamp(1rem, 3vw, 1.5rem);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .scroll-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--white);
-            border: 2px solid var(--border);
-            color: var(--primary);
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 10;
-            flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        .scroll-btn:hover {
-            background: var(--primary);
-            color: var(--white);
-            border-color: var(--primary);
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(15, 23, 42, 0.2);
-        }
-        
-        .scroll-btn:active {
-            transform: scale(0.95);
-        }
-        
-        .banners-scroll-container {
-            flex: 1;
-            overflow: hidden;
-            position: relative;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
-        
-        .banners-scroll {
-            display: flex;
-            gap: clamp(1rem, 2vw, 1.5rem);
-            padding: 0.5rem;
-            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            -webkit-overflow-scrolling: touch;
-        }
-        
-        .banner-item {
-            position: relative;
-            border-radius: var(--radius);
-            overflow: hidden;
-            aspect-ratio: 16/9;
-            min-width: 100%;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .banner-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .banner-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s ease;
-        }
-        
-        .banner-item:hover .banner-img {
-            transform: scale(1.05);
-        }
-        
-        .banner-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent);
-            color: white;
-            padding: clamp(1.5rem, 4vw, 2.5rem);
-        }
-        
-        .banner-title {
-            font-size: clamp(1.3rem, 3vw, 1.8rem);
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .banner-subtitle {
-            font-size: clamp(0.95rem, 2vw, 1.1rem);
-            opacity: 0.95;
-            font-weight: 400;
-        }
-        
-        /* Banner Dots Indicator */
-        .banner-dots {
-            display: flex;
-            justify-content: center;
-            gap: 0.75rem;
-            margin-top: 1.5rem;
-            position: absolute;
-            bottom: 1rem;
-            left: 0;
-            right: 0;
-            z-index: 5;
-        }
-        
-        .banner-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            padding: 0;
-        }
-        
-        .banner-dot.active {
-            background: var(--accent);
-            transform: scale(1.2);
-        }
-        
-        .banner-dot:hover {
-            background: var(--white);
-            transform: scale(1.3);
-        }
+       body{
+  margin:0;
+}
 
+/* Default (Large Desktops) */
+.banner{
+  width:100%;
+  height:100vh;
+  background-image:url('banner2.png');
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+
+/* Laptops (1024px and below) */
+@media (max-width:1024px){
+  .banner{
+    height:90vh;
+  }
+}
+
+/* Tablets (768px and below) */
+@media (max-width:768px){
+  .banner{
+    height:75vh;
+  }
+}
+
+/* Large Mobiles (600px and below) */
+@media (max-width:600px){
+  .banner{
+    height:65vh;
+  }
+}
+
+/* Medium & Small Mobiles (480px and below) */
+@media (max-width:480px){
+  .banner{
+    height:55vh;
+  }
+}
         /* --- CONTAINER & LAYOUT --- */
         .container { 
             max-width: 1400px; 
@@ -2040,11 +1935,9 @@
 
             <!-- Navigation Links -->
             <ul class="nav-links" id="navLinks">
-                <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
                 <li><a href="#new-arrivals" class="nav-link active"><i class="fas fa-star"></i> New Arrivals</a></li>
                 <li><a href="#discounted" class="nav-link"><i class="fas fa-tag"></i> Discounted</a></li>
                 <li><a href="#best" class="nav-link"><i class="fas fa-crown"></i> Best</a></li>
-                <li><a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
             </ul>
 
             <!-- Actions -->
@@ -2058,50 +1951,8 @@
     </header>
 
     <!-- BANNERS SECTION -->
-    <section class="banners-section">
-        <div class="banners-container">
-            <!-- Left Scroll Button -->
-            <button class="scroll-btn left" onclick="scrollBanners(-1)" aria-label="Scroll left">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            
-            <!-- Scrollable Banners Container -->
-            <div class="banners-scroll-container">
-                <div class="banners-scroll" id="bannersScroll">
-                    <!-- Banner 1 -->
-                    <div class="banner-item">
-                        <img src="banner1.png" alt="New Collection" class="banner-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80'">
-                        <div class="banner-overlay">
-                            <div class="banner-title">New Collection 2024</div>
-                            <div class="banner-subtitle">Discover our latest arrivals</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Banner 2 -->
-                    <div class="banner-item">
-                        <img src="banner2.png" alt="Summer Sale" class="banner-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=800&q=80'">
-                        <div class="banner-overlay">
-                            <div class="banner-title">Summer Sale</div>
-                            <div class="banner-subtitle">Up to 50% off selected items</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Banner 3 -->
-                    <div class="banner-item">
-                        <img src="banner3.png" alt="Premium Quality" class="banner-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=800&q=80'">
-                        <div class="banner-overlay">
-                            <div class="banner-title">Premium Quality</div>
-                            <div class="banner-subtitle">Crafted with excellence</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Right Scroll Button -->
-            <button class="scroll-btn right" onclick="scrollBanners(1)" aria-label="Scroll right">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-        </div>
+    <section class="banners-section"> 
+            <div class="banner"></div>
     </section>
 
     <!-- CATEGORY TABS -->
